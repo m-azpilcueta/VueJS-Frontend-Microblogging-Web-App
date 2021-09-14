@@ -1,36 +1,24 @@
 <template>
   <v-app>
-    <v-app-bar app color="primary" dark>
-      <div class="d-flex align-center">
-        <v-img
-          alt="Vuetify Logo"
-          class="shrink mr-2"
-          contain
-          src="https://cdn.vuetifyjs.com/images/logos/vuetify-logo-dark.png"
-          transition="scale-transition"
-          width="40"
-        />
+    <!-- Notificaciones usando vue-notification -->
+    <notifications :max="3" :width="400" position="top center" />
 
-        <v-img
-          alt="Vuetify Name"
-          class="shrink mt-1 hidden-sm-and-down"
-          contain
-          min-width="100"
-          src="https://cdn.vuetifyjs.com/images/logos/vuetify-name-dark.png"
-          width="100"
-        />
-      </div>
+    <v-app-bar app color="primary" dark>
+      <v-toolbar-title>
+        <router-link to="/" tag="span" class="pointer">vue-example</router-link>
+      </v-toolbar-title>
 
       <v-spacer></v-spacer>
 
-      <v-btn
-        href="https://github.com/vuetifyjs/vuetify/releases/latest"
-        target="_blank"
-        text
-      >
-        <span class="mr-2">Latest Release</span>
-        <v-icon>mdi-open-in-new</v-icon>
-      </v-btn>
+      <v-toolbar-items>
+        <v-btn to="/posts" text>posts</v-btn>
+        <v-btn active-class="hide-active" icon to="/login" v-if="!isLogged">
+          <v-icon>mdi-login</v-icon>
+        </v-btn>
+        <v-btn icon @click="logout()" v-if="isLogged">
+          <v-icon>mdi-logout</v-icon>
+        </v-btn>
+      </v-toolbar-items>
     </v-app-bar>
 
     <v-main>
@@ -40,11 +28,31 @@
 </template>
 
 <script>
+import store from "@/common/store";
+import auth from "@/common/auth";
+
 export default {
   name: "App",
-
-  data: () => ({
-    //
-  }),
+  data() {
+    return {
+      user: store.state.user,
+    };
+  },
+  computed: {
+    isLogged() {
+      return this.user.logged;
+    },
+  },
+  methods: {
+    logout() {
+      auth.logout();
+      // Después de hacer logout nos vamos a home
+      if (this.$router.currentRoute.name != "Home") {
+        this.$router.push({ name: "Home" });
+      }
+    },
+  },
 };
 </script>
+
+<style lang="scss" src="./App.scss"></style>
