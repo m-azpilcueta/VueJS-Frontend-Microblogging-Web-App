@@ -30,6 +30,7 @@ export default {
   components: { PostCard },
   async mounted() {
     this.posts = await PostRepository.findAll();
+    this.posts.reverse();
   },
 };
 </script>

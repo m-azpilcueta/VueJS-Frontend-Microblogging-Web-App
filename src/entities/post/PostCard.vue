@@ -7,7 +7,7 @@
       <v-spacer />
       <span>by {{ post.author.login }}</span>
     </v-card-title>
-    <v-card-subtitle> {{ post.timestamp }} </v-card-subtitle>
+    <v-card-subtitle> {{ dateAsString(post.timestamp) }} </v-card-subtitle>
 
     <v-card-text v-if="post.tags.length > 0">
       Tags: <span class="tags">{{ tagsAsString(post.tags) }}</span>
@@ -16,6 +16,8 @@
 </template>
 
 <script>
+import moment from "moment";
+
 export default {
   name: "PostCard",
   props: {
@@ -27,6 +29,9 @@ export default {
   methods: {
     tagsAsString(tags) {
       return tags.map((t) => t.name).join(", ");
+    },
+    dateAsString(date) {
+      return moment(date).format("DD/MM/YYYY, hh:mm:ss");
     },
   },
 };
