@@ -9,7 +9,7 @@
             <v-spacer />
             <span>by {{ post.author.login }}</span>
           </v-card-title>
-          <v-card-subtitle> {{ post.timestamp }} </v-card-subtitle>
+          <v-card-subtitle> {{ dateAsString(post.timestamp) }} </v-card-subtitle>
 
           <v-card-text>
             <div>
@@ -34,6 +34,7 @@
 
 <script>
 import PostRepository from "@/repositories/PostRepository";
+import moment from "moment";
 
 export default {
   data() {
@@ -64,6 +65,9 @@ export default {
   methods: {
     back() {
       this.$router.go(-1);
+    },
+    dateAsString(date) {
+      return moment(date).format("DD/MM/YYYY, hh:mm:ss");
     },
   },
 };
