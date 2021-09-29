@@ -3,6 +3,7 @@ import PostForm from "./PostForm";
 import PostDetail from "./PostDetail";
 import PostListPreloading from "./PostListPreloading";
 import PostListSinVuetify from "./PostListSinVuetify";
+import UserDetail from "../user/UserDetail";
 
 const routes = [
   {
@@ -44,6 +45,11 @@ const routes = [
     name: "PostUpdate",
     path: "/posts/:id/update",
     component: PostForm,
+  },
+  {
+    name: "UserDetail",
+    path: "/user/:id",
+    component: UserDetail,
   },
 ];
 

@@ -7,7 +7,9 @@
           <v-card-title>
             <span>{{ post.title }}</span>
             <v-spacer />
-            <span>by {{ post.author.login }}</span>
+            <router-link v-if="post.author.login != null" :to="{ name: 'UserDetail', params: { id: post.author.id } }" v-slot="{ navigate }" custom>
+              <span @click="navigate" class="pointer">by {{ post.author.login }}</span>
+            </router-link>
           </v-card-title>
           <v-card-subtitle> {{ dateAsString(post.timestamp) }} </v-card-subtitle>
 
