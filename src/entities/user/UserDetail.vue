@@ -1,6 +1,5 @@
 <template>
   <v-row>
-    <v-col v-if="loading" class="loading"> Loading... </v-col>
     <v-col v-if="user">
       {{ user }}
     </v-col>
@@ -9,28 +8,46 @@
 
 <script>
 import UserRepository from "@/repositories/UserRepository";
+import Vue from "vue";
 
 export default {
   data() {
     return {
-      loading: false,
       user: null,
     };
   },
-  async mounted() {
-    this.loading = true;
+  async beforeRouteEnter(to, from, next) {
     try {
-      this.user = await UserRepository.findOne(this.$route.params.id);
-      this.user.posts.reverse();
+      const data = await UserRepository.findOne(to.params.id);
+      data.posts.reverse();
+      next((vm) => vm.setData(data));
     } catch (e) {
-      this.$notify({
+      Vue.$notify({
         text: e.response.data.message,
         type: "error",
       });
-      setTimeout(() => this.back(), 2000);
-    } finally {
-      this.loading = false;
+      setTimeout(() => next(-1), 2000);
     }
+  },
+  async beforeRouteUpdate(to, from, next) {
+    try {
+      this.user = null;
+      const data = await UserRepository.findOne(to.params.id);
+      data.posts.reverse();
+      this.setData(data);
+      next();
+    } catch (e) {
+      Vue.$notify({
+        text: e.response.data.message,
+        type: "error",
+      });
+      setTimeout(() => next(-1), 2000);
+    }
+  },
+  methods: {
+    setData(data) {
+      this.user = data;
+    },
   },
 };
 </script>

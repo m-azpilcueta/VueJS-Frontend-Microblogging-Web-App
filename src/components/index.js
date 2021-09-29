@@ -1,5 +1,5 @@
 import Home from "./Home";
-import Login from "./Login";
 import NotFound from "./NotFound";
+import UserAuth from "./UserAuth";
 
-export { Home, Login, NotFound };
+export { Home, NotFound, UserAuth };

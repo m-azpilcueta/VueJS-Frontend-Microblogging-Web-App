@@ -2,7 +2,7 @@ import Vue from "vue";
 import VueRouter from "vue-router";
 import auth from "@/common/auth";
 import store from "@/common/store";
-import { NotFound, Login, Home } from "@/components";
+import { NotFound, UserAuth, Home } from "@/components";
 import postRouter from "@/entities/post/post.router.js";
 
 const user = store.state.user;
@@ -11,9 +11,9 @@ Vue.use(VueRouter);
 
 const routes = [
   {
-    path: "/login",
-    name: "Login",
-    component: Login,
+    path: "/auth",
+    name: "UserAuth",
+    component: UserAuth,
     meta: { public: true, isLoginPage: true },
   },
   {
@@ -46,13 +46,13 @@ router.beforeEach((to, from, next) => {
       // página privada
       if (userIsLogged) {
         if (requiredAuthority && requiredAuthority != loggedUserAuthority) {
-          // usuario logueado pero sin permisos suficientes, le redirigimos a la página de login
+          // usuario logueado pero sin permisos suficientes, le redirigimos a la página de auth
           Vue.notify({
             text: "Access is not allowed for the current user. Try to log again.",
             type: "error",
           });
           auth.logout();
-          next("/login");
+          next("/auth");
         } else {
           // usuario logueado y con permisos adecuados
           next();
@@ -63,7 +63,7 @@ router.beforeEach((to, from, next) => {
           text: "This page requires authentication.",
           type: "error",
         });
-        next("/login");
+        next("/auth");
       }
     } else {
       // página pública

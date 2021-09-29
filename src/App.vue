@@ -16,7 +16,7 @@
         <v-btn to="/posts" exact text>posts</v-btn>
         <v-btn to="/posts_preloading" exact text>posts preloading</v-btn>
         <v-btn to="/posts_sin_vuetify" exact text>posts sin vuetify</v-btn>
-        <v-btn active-class="hide-active" icon to="/login" v-if="!isLogged">
+        <v-btn active-class="hide-active" icon to="/auth" v-if="!isLogged">
           <v-icon>mdi-login</v-icon>
         </v-btn>
         <v-btn :to="userProfileRoute" v-if="isLogged" icon>

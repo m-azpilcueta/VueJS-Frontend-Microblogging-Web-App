@@ -1,7 +1,7 @@
 <template>
   <v-layout align-center justify-center>
     <v-flex xs12 sm8 md4>
-      <v-form @submit.prevent="userLogin">
+      <v-form @submit.prevent="userRegister">
         <v-card>
           <v-card-text>
             <v-text-field label="Login" name="login" prepend-icon="person" type="text" v-model="username"></v-text-field>
@@ -11,7 +11,7 @@
 
           <v-card-actions>
             <v-spacer></v-spacer>
-            <v-btn type="submit" color="primary">Login</v-btn>
+            <v-btn type="submit" color="primary">Register</v-btn>
           </v-card-actions>
         </v-card>
       </v-form>
@@ -30,14 +30,14 @@ export default {
     };
   },
   methods: {
-    userLogin() {
+    userRegister() {
       auth
-        .login({
+        .register({
           login: this.username,
           password: this.password,
         })
         .then(() => {
-          // vamos a la página anterior después de autenticarnos
+          // vamos a la página anterior después de registrarnos
           this.$router.go(-1);
         })
         .catch((err) => {
