@@ -19,6 +19,9 @@
         <v-btn active-class="hide-active" icon to="/login" v-if="!isLogged">
           <v-icon>mdi-login</v-icon>
         </v-btn>
+        <v-btn :to="userProfileRoute" v-if="isLogged" icon>
+          <v-icon> mdi-account </v-icon>
+        </v-btn>
         <v-btn icon @click="logout()" v-if="isLogged">
           <v-icon>mdi-logout</v-icon>
         </v-btn>
@@ -45,6 +48,9 @@ export default {
   computed: {
     isLogged() {
       return this.user.logged;
+    },
+    userProfileRoute() {
+      return "/user/" + this.user.id;
     },
   },
   methods: {

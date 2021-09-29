@@ -22,6 +22,7 @@ function logout() {
   user.login = "";
   user.authority = "";
   user.logged = false;
+  user.id = "";
 }
 
 function isAdmin() {
@@ -51,6 +52,7 @@ async function _authenticate() {
   user.login = response.login;
   user.authority = response.authority;
   user.logged = true;
+  user.id = response.id;
   return user;
 }
 

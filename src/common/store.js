@@ -4,6 +4,7 @@ const store = {
       authority: "",
       login: "",
       logged: false,
+      id: "",
     },
   },
 };
