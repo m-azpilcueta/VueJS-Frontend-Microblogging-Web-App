@@ -26,6 +26,7 @@
           <v-card-actions>
             <v-spacer />
             <v-btn :to="{ name: 'PostUpdate', params: { id: post.id } }" color="primary"> Edit </v-btn>
+            <v-btn class="remove" @click="removePost" v-if="checkRemove"> Remove </v-btn>
             <v-btn @click="back()"> Back </v-btn>
           </v-card-actions>
         </v-card>
@@ -37,12 +38,14 @@
 <script>
 import PostRepository from "@/repositories/PostRepository";
 import moment from "moment";
+import store from "@/common/store";
 
 export default {
   data() {
     return {
       loading: false,
       post: null,
+      user: store.state.user,
     };
   },
   async mounted() {
@@ -63,13 +66,29 @@ export default {
     tagsAsString() {
       return this.post.tags.map((t) => t.name).join(", ");
     },
+    checkRemove() {
+      return this.post.author.id == this.user.id;
+    },
   },
   methods: {
     back() {
       this.$router.go(-1);
     },
     dateAsString(date) {
-      return moment(date).format("DD/MM/YYYY, hh:mm:ss");
+      return moment(date).format("DD/MM/YYYY, HH:mm:ss");
+    },
+    async removePost() {
+      try {
+        await PostRepository.delete(this.$route.params.id);
+      } catch (e) {
+        this.$notify({
+          text: e.response.data.message,
+          type: "error",
+        });
+        setTimeout(() => this.back(), 2000);
+      } finally {
+        this.$router.push({ path: `/user/${this.user.id}` });
+      }
     },
   },
 };
@@ -87,5 +106,10 @@ export default {
 
 .error {
   margin-top: 40px;
+}
+
+.remove {
+  background-color: red !important;
+  color: whitesmoke !important;
 }
 </style>
