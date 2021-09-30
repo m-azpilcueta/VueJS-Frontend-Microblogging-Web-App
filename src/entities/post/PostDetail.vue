@@ -75,7 +75,7 @@ export default {
       this.$router.go(-1);
     },
     dateAsString(date) {
-      return moment(date).format("DD/MM/YYYY, HH:mm:ss");
+      return moment(date).format("LLL");
     },
     async removePost() {
       try {

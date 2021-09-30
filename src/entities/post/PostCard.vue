@@ -34,7 +34,7 @@ export default {
       return tags.map((t) => t.name).join(", ");
     },
     dateAsString(date) {
-      return moment(date).format("DD/MM/YYYY, hh:mm:ss");
+      return moment(date).format("LLL");
     },
   },
 };

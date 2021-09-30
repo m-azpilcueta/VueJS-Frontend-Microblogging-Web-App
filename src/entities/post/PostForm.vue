@@ -14,7 +14,6 @@
         <v-card-actions>
           <v-spacer />
           <v-btn color="primary" type="submit">Submit</v-btn>
-          <v-btn color="warning" @click="remove()" v-if="post.id">Remove</v-btn>
           <v-btn @click="back()">Back</v-btn>
         </v-card-actions>
       </v-card>
@@ -82,10 +81,6 @@ export default {
           type: "error",
         });
       }
-    },
-    async remove() {
-      await PostRepository.delete(this.post.id);
-      this.$router.replace({ name: "PostList" });
     },
     back() {
       this.$router.go(-1);
