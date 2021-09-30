@@ -50,6 +50,7 @@ const routes = [
     name: "UserDetail",
     path: "/user/:id",
     component: UserDetail,
+    meta: { public: true },
   },
 ];
 
