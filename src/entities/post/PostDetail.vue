@@ -80,14 +80,13 @@ export default {
     async removePost() {
       try {
         await PostRepository.delete(this.$route.params.id);
+        this.$router.push({ path: `/user/${this.user.id}` });
       } catch (e) {
         this.$notify({
           text: e.response.data.message,
           type: "error",
         });
         setTimeout(() => this.back(), 2000);
-      } finally {
-        this.$router.push({ path: `/user/${this.user.id}` });
       }
     },
   },
