@@ -11,11 +11,13 @@
           <div class="center">
             <h1>Tags</h1>
           </div>
-          <div class="right d-flex justify-start align-center pointer">
-            <div v-if="isAdmin" class="manage-wrapper d-flex justify-center">
-              <v-icon color="primary"> mdi-cog </v-icon>
-              <span class="hidden-xs-only">Manage</span>
-            </div>
+          <div class="right d-flex justify-start align-center">
+            <router-link :to="{ name: 'ManageTags' }" v-slot="{ navigate }" custom>
+              <div v-if="isAdmin" @click="navigate" class="manage-wrapper d-flex justify-center pointer">
+                <v-icon color="primary"> mdi-cog </v-icon>
+                <span class="hidden-xs-only">Manage</span>
+              </div>
+            </router-link>
           </div>
         </div>
         <div class="tag-list d-flex justify-center flex-wrap">
