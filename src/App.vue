@@ -6,7 +6,7 @@
     <v-app-bar app color="primary" dark>
       <v-toolbar-title>
         <router-link to="/" v-slot="{ navigate }" custom>
-          <span @click="navigate" class="pointer">vue-example</span>
+          <span @click="navigate" class="pointer">Microblogging</span>
         </router-link>
       </v-toolbar-title>
 
@@ -14,8 +14,7 @@
 
       <v-toolbar-items>
         <v-btn to="/posts" exact text>posts</v-btn>
-        <v-btn to="/posts_preloading" exact text>posts preloading</v-btn>
-        <v-btn to="/posts_sin_vuetify" exact text>posts sin vuetify</v-btn>
+        <v-btn to="/tags" exact text>tags</v-btn>
         <v-btn active-class="hide-active" icon to="/auth" v-if="!isLogged">
           <v-icon>mdi-login</v-icon>
         </v-btn>

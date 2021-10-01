@@ -4,6 +4,7 @@ import auth from "@/common/auth";
 import store from "@/common/store";
 import { NotFound, UserAuth, Home } from "@/components";
 import postRouter from "@/entities/post/post.router.js";
+import tagRouter from "@/entities/tags/tags.router.js";
 
 const user = store.state.user;
 
@@ -28,7 +29,7 @@ const routes = [
 const router = new VueRouter({
   mode: "history",
   base: process.env.BASE_URL,
-  routes: routes.concat(postRouter),
+  routes: routes.concat(postRouter).concat(tagRouter),
 });
 
 router.beforeEach((to, from, next) => {
