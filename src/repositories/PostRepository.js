@@ -19,6 +19,12 @@ export default {
     return (await HTTP.get(`${resource}/${id}`)).data;
   },
 
+  async findAllByTag(id) {
+    await sleep(1000);
+    const response = await HTTP.get(`${resource}/tag/${id}`);
+    return response.data;
+  },
+
   async save(post) {
     await sleep(1000);
     if (post.id) {

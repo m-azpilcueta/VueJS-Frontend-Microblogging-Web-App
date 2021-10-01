@@ -5,8 +5,8 @@
         <span @click="navigate" class="pointer">{{ post.title }}</span>
       </router-link>
       <v-spacer />
-      <router-link v-if="post.author.login != null" :to="{ name: 'UserDetail', params: { id: post.author.id } }" v-slot="{ navigate }" custom>
-        <span @click="navigate" class="pointer">by {{ post.author.login }}</span>
+      <router-link v-if="author.login != null" :to="{ name: 'UserDetail', params: { id: author.id } }" v-slot="{ navigate }" custom>
+        <span @click="navigate" class="pointer">by {{ author.login }}</span>
       </router-link>
     </v-card-title>
     <router-link :to="{ name: 'PostDetail', params: { id: post.id } }" v-slot="{ navigate }" custom>
@@ -25,6 +25,10 @@ export default {
   name: "PostCard",
   props: {
     post: {
+      type: Object,
+      required: true,
+    },
+    author: {
       type: Object,
       required: true,
     },

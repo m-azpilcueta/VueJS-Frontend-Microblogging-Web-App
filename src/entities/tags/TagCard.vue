@@ -1,7 +1,9 @@
 <template>
-  <button class="accent">
-    {{ tag.name }}
-  </button>
+  <router-link :to="{ name: 'TagPosts', params: { id: tag.id } }" v-slot="{ navigate }" custom>
+    <button @click="navigate" class="accent">
+      {{ tag.name }}
+    </button>
+  </router-link>
 </template>
 
 <script>
