@@ -15,6 +15,7 @@
       <v-toolbar-items>
         <v-btn to="/posts" exact text>posts</v-btn>
         <v-btn to="/tags" exact text>tags</v-btn>
+        <v-btn to="/users" exact text v-if="isAdmin">users</v-btn>
         <v-btn active-class="hide-active" icon to="/auth" v-if="!isLogged">
           <v-icon>mdi-login</v-icon>
         </v-btn>
@@ -50,6 +51,9 @@ export default {
     },
     userProfileRoute() {
       return "/user/" + this.user.id;
+    },
+    isAdmin() {
+      return this.user.authority == "ADMIN";
     },
   },
   methods: {

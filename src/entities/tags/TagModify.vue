@@ -1,6 +1,7 @@
 <template>
-  <div v-if="isVisible" class="d-flex justify-center">
-    <input type="text" v-model="newTag" @change="changed = true" />
+  <div v-if="isVisible" class="d-flex justify-center align-center">
+    <label for="name">Edit:</label>
+    <input id="name" type="text" v-model="newTag" @change="changed = true" />
     <v-icon v-if="changed" @click="updateTag">mdi-check-circle</v-icon>
     <v-icon @click="removeTag">mdi-delete</v-icon>
   </div>
