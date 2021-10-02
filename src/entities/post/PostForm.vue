@@ -64,7 +64,7 @@ export default {
         return;
       }
       try {
-        if (this.post.title == null) {
+        if (this.post.title == null || this.post.title == "") {
           this.post.title = this.post.body.slice(0, 47);
           if (this.post.body.length > 47) {
             this.post.title = this.post.title.concat("...");
