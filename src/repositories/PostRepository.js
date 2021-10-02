@@ -27,11 +27,7 @@ export default {
 
   async save(post) {
     await sleep(1000);
-    if (post.id) {
-      return (await HTTP.put(`${resource}/${post.id}`, post)).data;
-    } else {
-      return (await HTTP.post(`${resource}`, post)).data;
-    }
+    return (await HTTP.post(`${resource}`, post)).data;
   },
 
   async delete(id) {

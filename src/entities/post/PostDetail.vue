@@ -25,7 +25,6 @@
 
           <v-card-actions>
             <v-spacer />
-            <v-btn :to="{ name: 'PostUpdate', params: { id: post.id } }" color="primary"> Edit </v-btn>
             <v-btn class="remove" @click="removePost" v-if="checkRemove"> Remove </v-btn>
             <v-btn @click="back()"> Back </v-btn>
           </v-card-actions>

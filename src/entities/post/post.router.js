@@ -42,11 +42,6 @@ const routes = [
     meta: { public: true },
   },
   {
-    name: "PostUpdate",
-    path: "/posts/:id/update",
-    component: PostForm,
-  },
-  {
     name: "UserDetail",
     path: "/user/:id",
     component: UserDetail,
