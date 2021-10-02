@@ -3,7 +3,7 @@
     <v-row>
       <v-col cols="12" class="text-center">
         <div class="right-buttons-bar">
-          <v-btn :to="{ name: 'PostCreate' }" color="primary">
+          <v-btn v-if="!isAdmin" :to="{ name: 'PostCreate' }" color="primary">
             <v-icon>mdi-plus</v-icon>
           </v-btn>
         </div>
@@ -20,6 +20,7 @@
 <script>
 import PostCard from "./PostCard.vue";
 import PostRepository from "@/repositories/PostRepository";
+import store from "@/common/store";
 
 export default {
   data() {
@@ -28,6 +29,11 @@ export default {
     };
   },
   components: { PostCard },
+  computed: {
+    isAdmin() {
+      return store.state.user.authority == "ADMIN";
+    },
+  },
   async mounted() {
     this.posts = await PostRepository.findAll();
     this.posts.reverse();

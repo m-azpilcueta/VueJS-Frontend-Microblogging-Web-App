@@ -4,7 +4,7 @@
       <v-card>
         <v-card-title>
           <v-text-field class="f-title" v-model="post.title" label="Title" :rules="titleRules"></v-text-field>
-          <v-select class="f-author" v-model="post.author" :items="users" item-text="login" return-object label="Author" :rules="authorRules"></v-select>
+          <v-text-field class="f-author" label="Author" disabled :value="authorName"></v-text-field>
         </v-card-title>
         <v-card-text>
           <v-select v-model="post.tags" :items="tags" item-text="name" label="Tags" return-object multiple></v-select>
@@ -23,14 +23,13 @@
 
 <script>
 import PostRepository from "@/repositories/PostRepository";
-import UserRepository from "@/repositories/UserRepository";
 import TagRepository from "@/repositories/TagRepository";
+import store from "@/common/store";
 
 export default {
   data() {
     return {
       post: {},
-      users: [],
       tags: [],
     };
   },
@@ -39,17 +38,15 @@ export default {
       const rules = [(v) => (v || "").length <= 50 || `A maximum of 50 characters is allowed`];
       return rules;
     },
-    authorRules() {
-      const rules = [(v) => !!v || "Field is required"];
-      return rules;
-    },
     bodyRules() {
       const rules = [(v) => !!v || "Field is required", (v) => (v || "").length <= 300 || `A maximum of 300 characters is allowed`];
       return rules;
     },
+    authorName() {
+      return store.state.user.login;
+    },
   },
   async created() {
-    this.users = await UserRepository.findAll();
     this.tags = await TagRepository.findAll();
 
     if (this.$route.params.id) {
