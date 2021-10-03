@@ -8,7 +8,7 @@
           <v-col cols="3">
             <v-btn v-if="!isAdmin && isLogged" :to="{ name: 'PostCreate' }" color="primary">
               <v-icon>mdi-plus</v-icon>
-              <span class="d-none d-md-flex">Create post</span>
+              <span class="d-none d-md-flex ml-1">Create post</span>
             </v-btn>
           </v-col>
         </v-row>
