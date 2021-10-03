@@ -1,43 +1,44 @@
 <template>
-  <v-container>
-    <v-row>
-      <v-col cols="12" v-if="loading" class="loading">Loading...</v-col>
-      <v-col cols="8" offset="2" v-if="post">
-        <v-card>
-          <v-card-title>
-            <span>{{ post.title }}</span>
-            <v-spacer />
-            <router-link v-if="post.author.login != null" :to="{ name: 'UserDetail', params: { id: post.author.id } }" v-slot="{ navigate }" custom>
-              <span @click="navigate" class="pointer">by {{ post.author.login }}</span>
-            </router-link>
-          </v-card-title>
-          <v-card-subtitle> {{ dateAsString(post.timestamp) }} </v-card-subtitle>
-
-          <v-card-text>
-            <div>
+  <div class="my-container">
+    <LoadSpinner v-if="loading"></LoadSpinner>
+    <section class="d-flex justify-center" v-if="post">
+      <div class="box d-flex flex-column">
+        <div class="d-flex px-4 pb-4">
+          <v-icon size="52">mdi-account-circle</v-icon>
+          <div class="titles d-flex flex-column ml-4">
+            <h1>{{ post.title }}</h1>
+            <span>
+              <router-link v-if="post.author.login != null" :to="{ name: 'UserDetail', params: { id: post.author.id } }" v-slot="{ navigate }" custom>
+                <span @click="navigate" class="pointer mr-1"
+                  >by <strong>{{ post.author.login }}</strong></span
+                >
+              </router-link>
+              <v-icon size="20">mdi-calendar-month</v-icon>
+              <span> {{ dateAsString(post.timestamp) }} </span>
+            </span>
+            <span v-if="post.tags.length > 0">
               Tags: <span class="tags">{{ tagsAsString }}</span>
-            </div>
-            <v-divider />
-            <div class="post">
-              {{ post.body }}
-            </div>
-          </v-card-text>
-
-          <v-card-actions>
-            <v-spacer />
-            <v-btn class="remove" @click="removePost" v-if="checkRemove"> Remove </v-btn>
-            <v-btn @click="back()"> Back </v-btn>
-          </v-card-actions>
-        </v-card>
-      </v-col>
-    </v-row>
-  </v-container>
+            </span>
+          </div>
+        </div>
+        <v-divider />
+        <div class="px-4 post">
+          {{ post.body }}
+        </div>
+        <div class="action-buttons d-flex justify-end">
+          <v-btn class="remove mr-3" @click="removePost" v-if="checkRemove"> Remove </v-btn>
+          <v-btn @click="back()" color="primary"> Back </v-btn>
+        </div>
+      </div>
+    </section>
+  </div>
 </template>
 
 <script>
 import PostRepository from "@/repositories/PostRepository";
 import moment from "moment";
 import store from "@/common/store";
+import LoadSpinner from "@/components/LoadSpinner";
 
 export default {
   data() {
@@ -47,6 +48,7 @@ export default {
       user: store.state.user,
     };
   },
+  components: { LoadSpinner },
   async mounted() {
     this.loading = true;
     try {
@@ -98,7 +100,7 @@ export default {
 }
 .post {
   padding: 30px 50px;
-  color: rgba(0, 0, 0, 0.87);
+  color: #383950;
   font-size: larger;
 }
 
@@ -109,5 +111,11 @@ export default {
 .remove {
   background-color: red !important;
   color: whitesmoke !important;
+}
+
+h1,
+span,
+.v-icon {
+  color: #383950;
 }
 </style>
