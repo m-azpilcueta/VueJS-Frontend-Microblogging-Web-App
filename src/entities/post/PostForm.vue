@@ -1,24 +1,21 @@
 <template>
-  <v-container class="text-center">
-    <v-form ref="form" @submit.prevent="save">
-      <v-card>
-        <v-card-title>
+  <div class="d-flex justify-center">
+    <div class="box d-flex flex-column">
+      <v-form ref="form" @submit.prevent="save">
+        <div class="d-flex">
           <v-text-field class="f-title" v-model="post.title" label="Title" :rules="titleRules"></v-text-field>
           <v-text-field class="f-author" label="Author" disabled :value="author.login"></v-text-field>
-        </v-card-title>
-        <v-card-text>
-          <v-select v-model="post.tags" :items="tags" item-text="name" label="Tags" return-object multiple></v-select>
-
-          <v-textarea v-model="post.body" label="Body" rows="7" :rules="bodyRules"></v-textarea>
-        </v-card-text>
-        <v-card-actions>
+        </div>
+        <v-select v-model="post.tags" :items="tags" item-text="name" label="Tags" return-object multiple></v-select>
+        <v-textarea v-model="post.body" label="Body" rows="7" :rules="bodyRules"></v-textarea>
+        <div class="d-flex">
           <v-spacer />
           <v-btn color="primary" type="submit">Submit</v-btn>
-          <v-btn @click="back()">Back</v-btn>
-        </v-card-actions>
-      </v-card>
-    </v-form>
-  </v-container>
+          <v-btn @click="back()" class="ml-4">Back</v-btn>
+        </div>
+      </v-form>
+    </div>
+  </div>
 </template>
 
 <script>
