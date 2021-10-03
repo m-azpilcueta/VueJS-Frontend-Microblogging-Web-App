@@ -1,21 +1,28 @@
 <template>
-  <v-card>
-    <v-card-title>
-      <router-link :to="{ name: 'PostDetail', params: { id: post.id } }" v-slot="{ navigate }" custom>
-        <span @click="navigate" class="pointer">{{ post.title }}</span>
-      </router-link>
-      <v-spacer />
-      <router-link v-if="author.login != null" :to="{ name: 'UserDetail', params: { id: author.id } }" v-slot="{ navigate }" custom>
-        <span @click="navigate" class="pointer">by {{ author.login }}</span>
-      </router-link>
-    </v-card-title>
-    <router-link :to="{ name: 'PostDetail', params: { id: post.id } }" v-slot="{ navigate }" custom>
-      <v-card-subtitle @click="navigate" class="pointer"> {{ dateAsString(post.timestamp) }} </v-card-subtitle>
-    </router-link>
-    <v-card-text v-if="post.tags.length > 0">
+  <div class="post-card d-flex flex-column">
+    <div class="d-flex flex-column flex-sm-row pa-2">
+      <v-icon v-if="post.author != null" size="56">mdi-account-circle</v-icon>
+      <div class="titles d-flex flex-column ma-2">
+        <router-link :to="{ name: 'PostDetail', params: { id: post.id } }" v-slot="{ navigate }" custom>
+          <strong @click="navigate" class="pointer">{{ post.title }}</strong>
+        </router-link>
+        <span>
+          <router-link v-if="author.login != null" :to="{ name: 'UserDetail', params: { id: author.id } }" v-slot="{ navigate }" custom>
+            <span @click="navigate" class="pointer mr-1"
+              >by <strong>{{ author.login }}</strong></span
+            >
+          </router-link>
+          <router-link :to="{ name: 'PostDetail', params: { id: post.id } }" v-slot="{ navigate }" custom>
+            <v-icon size="20">mdi-calendar-month</v-icon>
+            <span @click="navigate" class="pointer"> {{ dateAsString(post.timestamp) }} </span>
+          </router-link>
+        </span>
+      </div>
+    </div>
+    <span class="ml-4" v-if="post.tags.length > 0">
       Tags: <span class="tags">{{ tagsAsString(post.tags) }}</span>
-    </v-card-text>
-  </v-card>
+    </span>
+  </div>
 </template>
 
 <script>
@@ -47,5 +54,21 @@ export default {
 <style scoped>
 .tags {
   font-style: italic;
+}
+
+.titles {
+  width: 80%;
+  overflow-wrap: break-word;
+}
+
+.post-card {
+  width: 80%;
+  margin-left: 10%;
+}
+
+.v-icon,
+strong,
+span {
+  color: #383950;
 }
 </style>

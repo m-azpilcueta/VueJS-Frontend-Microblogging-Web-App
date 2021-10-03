@@ -74,5 +74,10 @@ input {
 
 .v-icon {
   margin-right: 1em;
+  color: #383950;
+}
+
+label {
+  color: #383950;
 }
 </style>

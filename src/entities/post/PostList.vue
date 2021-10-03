@@ -1,20 +1,21 @@
 <template>
-  <v-container>
-    <v-row>
-      <v-col cols="12" class="text-center">
-        <div class="right-buttons-bar">
-          <v-btn v-if="!isAdmin" :to="{ name: 'PostCreate' }" color="primary">
-            <v-icon>mdi-plus</v-icon>
-          </v-btn>
-        </div>
-        <h1>Blog Posts</h1>
-        <div class="caption">Data fetched <span class="font-weight-bold">after</span> navigation</div>
-      </v-col>
-      <v-col cols="12" sm="6" lg="3" v-for="post in posts" :key="post.id">
-        <PostCard :post="post" :author="post.author"></PostCard>
-      </v-col>
-    </v-row>
-  </v-container>
+  <div class="my-container">
+    <section class="d-flex justify-center">
+      <div class="box">
+        <v-row class="justify-center align-center mb-4">
+          <v-col cols="3"></v-col>
+          <v-col cols="4"><h1>Blog Posts</h1></v-col>
+          <v-col cols="3">
+            <v-btn :to="{ name: 'PostCreate' }" color="primary">
+              <v-icon>mdi-plus</v-icon>
+              <span class="d-none d-md-flex">Create post</span>
+            </v-btn>
+          </v-col>
+        </v-row>
+        <PostCard v-for="post in posts" :key="post.id" :post="post" :author="post.author"></PostCard>
+      </div>
+    </section>
+  </div>
 </template>
 
 <script>
@@ -40,3 +41,12 @@ export default {
   },
 };
 </script>
+
+<style lang="scss" scoped>
+.box {
+  h1 {
+    text-align: center;
+    color: #383950;
+  }
+}
+</style>

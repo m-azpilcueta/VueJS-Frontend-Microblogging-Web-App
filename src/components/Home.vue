@@ -15,5 +15,6 @@ export default {};
 h1 {
   margin-top: 30px;
   margin-bottom: 60px;
+  color: #383950;
 }
 </style>

@@ -1,7 +1,7 @@
 <template>
   <div class="my-container">
     <LoadSpinner v-if="loading"></LoadSpinner>
-    <section v-if="users" class="d-flex justify-center align-center">
+    <section v-if="users" class="d-flex justify-center">
       <div class="box">
         <h1>User List</h1>
         <div class="user-list">
@@ -49,6 +49,7 @@ section {
   h1 {
     text-align: center;
     margin-bottom: 2em;
+    color: #383950;
   }
 }
 </style>

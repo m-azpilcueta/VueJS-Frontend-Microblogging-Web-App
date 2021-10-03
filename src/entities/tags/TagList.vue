@@ -4,8 +4,8 @@
       <v-progress-circular indeterminate color="primary"></v-progress-circular>
       <span class="loading">Loading</span>
     </section>
-    <section class="tag-section d-flex align-center" v-if="tags">
-      <div class="tag-box">
+    <section class="tag-section d-flex justify-center" v-if="tags">
+      <div class="box">
         <div class="title-wrapper d-flex justify-center">
           <div class="left"></div>
           <div class="center">
@@ -80,20 +80,8 @@ export default {
 
   .tag-section {
     width: 100%;
-    height: 100%;
 
-    .tag-box {
-      width: 70%;
-      background-color: whitesmoke;
-      padding: 3.5em 1em;
-      margin: 0 auto;
-      border-radius: 3px;
-      box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
-
-      h1 {
-        text-align: center;
-      }
-
+    .box {
       .title-wrapper {
         margin-bottom: 1.5em;
 
@@ -105,7 +93,7 @@ export default {
           width: 40%;
 
           h1 {
-            font-size: xx-large;
+            text-align: center;
             color: #383950;
           }
         }

@@ -4,7 +4,7 @@
       <v-card>
         <v-card-title>
           <v-text-field class="f-title" v-model="post.title" label="Title" :rules="titleRules"></v-text-field>
-          <v-text-field class="f-author" label="Author" disabled :value="authorName"></v-text-field>
+          <v-text-field class="f-author" label="Author" disabled :value="author.login"></v-text-field>
         </v-card-title>
         <v-card-text>
           <v-select v-model="post.tags" :items="tags" item-text="name" label="Tags" return-object multiple></v-select>
@@ -24,6 +24,7 @@
 <script>
 import PostRepository from "@/repositories/PostRepository";
 import TagRepository from "@/repositories/TagRepository";
+import UserRepository from "@/repositories/UserRepository";
 import store from "@/common/store";
 
 export default {
@@ -31,6 +32,7 @@ export default {
     return {
       post: {},
       tags: [],
+      author: {},
     };
   },
   computed: {
@@ -42,11 +44,9 @@ export default {
       const rules = [(v) => !!v || "Field is required", (v) => (v || "").length <= 300 || `A maximum of 300 characters is allowed`];
       return rules;
     },
-    authorName() {
-      return store.state.user.login;
-    },
   },
   async created() {
+    this.author = await UserRepository.findOne(store.state.user.id);
     this.tags = await TagRepository.findAll();
 
     if (this.$route.params.id) {
@@ -66,6 +66,9 @@ export default {
           if (this.post.body.length > 47) {
             this.post.title = this.post.title.concat("...");
           }
+        }
+        if (this.post.author == null) {
+          this.post.author = this.author;
         }
         const savedPost = await PostRepository.save(this.post);
         this.$router.replace({

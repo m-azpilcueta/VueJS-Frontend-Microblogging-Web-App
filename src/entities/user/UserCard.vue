@@ -1,10 +1,10 @@
 <template>
   <div v-if="isVisible">
-    <v-row>
-      <v-col class="d-flex justify-center align-center">
+    <v-row class="d-flex flex-column flex-sm-row">
+      <v-col class="d-flex justify-center align-end">
         <v-icon size="100">mdi-account-circle</v-icon>
       </v-col>
-      <v-col class="d-flex flex-column">
+      <v-col class="d-flex flex-column align-center align-sm-start">
         <h2>{{ updatedUser.login }}</h2>
         <p><strong>Active: </strong>{{ updatedUser.active }}</p>
         <div class="d-flex flex-row justify-start align-center">
@@ -103,5 +103,11 @@ export default {
 .remove {
   background-color: #ff0000;
   color: #f3f3f5;
+}
+
+.v-icon,
+h2,
+p {
+  color: #383950;
 }
 </style>

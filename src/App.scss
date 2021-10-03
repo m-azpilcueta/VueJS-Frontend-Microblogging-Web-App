@@ -19,8 +19,8 @@
   right: 10%;
 }
 
-.v-main {
-  background-color:#e2e5ed;
+.v-main, .v-tabs-items {
+  background-color:#e2e5ed !important;
 }
 
 .box {
@@ -35,4 +35,8 @@
 .my-container {
   width: 100%;
   height: 100%;
+}
+
+.v-tabs-bar {
+  background-color: #f3f3f5;
 }

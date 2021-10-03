@@ -62,10 +62,10 @@ export default {
 
   section {
     width: 100%;
-    height: 100%;
 
     h1 {
       text-align: center;
+      color: #383950;
     }
 
     input::placeholder {
