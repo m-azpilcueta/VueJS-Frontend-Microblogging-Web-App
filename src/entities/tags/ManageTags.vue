@@ -5,8 +5,10 @@
       <div class="box">
         <h1>Manage Tags</h1>
         <div class="add-wrapper d-flex justify-center">
-          <input type="text" placeholder="New tag" v-model="newTag" />
-          <button @click="addTag()" type="submit">Add</button>
+          <v-form ref="form" @submit.prevent="addTag" class="d-flex align-center">
+            <v-text-field class="mr-4" label="New tag" v-model="newTag" :rules="addRules"></v-text-field>
+            <v-btn color="primary" type="submit">Add</v-btn>
+          </v-form>
         </div>
         <div class="tag-list">
           <TagModify v-for="tag in tags" :key="tag.id" :tag="tag"></TagModify>
@@ -29,9 +31,18 @@ export default {
       newTag: "",
     };
   },
+  computed: {
+    addRules() {
+      const rules = [(v) => !!v || "Field is required"];
+      return rules;
+    },
+  },
   components: { LoadSpinner, TagModify },
   methods: {
     async addTag() {
+      if (!this.$refs.form.validate()) {
+        return;
+      }
       await TagRepository.create({
         name: this.newTag,
       });

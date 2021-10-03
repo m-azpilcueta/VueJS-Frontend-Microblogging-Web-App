@@ -17,11 +17,11 @@
             <span @click="navigate" class="pointer"> {{ dateAsString(post.timestamp) }} </span>
           </router-link>
         </span>
+        <span v-if="post.tags.length > 0">
+          Tags: <span class="tags">{{ tagsAsString(post.tags) }}</span>
+        </span>
       </div>
     </div>
-    <span class="ml-4" v-if="post.tags.length > 0">
-      Tags: <span class="tags">{{ tagsAsString(post.tags) }}</span>
-    </span>
   </div>
 </template>
 

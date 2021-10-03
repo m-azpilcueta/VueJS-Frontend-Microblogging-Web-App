@@ -1,9 +1,10 @@
 <template>
   <div v-if="isVisible" class="d-flex justify-center align-center">
-    <label for="name">Edit:</label>
-    <input id="name" type="text" v-model="newTag" @change="changed = true" />
-    <v-icon v-if="changed" @click="updateTag">mdi-check-circle</v-icon>
-    <v-icon @click="removeTag">mdi-delete</v-icon>
+    <v-form ref="form" @submit.prevent="updateTag" class="d-flex align-center">
+      <v-text-field class="mr-4" label="Edit" v-model="newTag" @input="changed = true" :rules="addRules"></v-text-field>
+      <v-icon class="pointer" v-if="changed" @click="updateTag">mdi-check-circle</v-icon>
+      <v-icon class="pointer" @click="removeTag">mdi-delete</v-icon>
+    </v-form>
   </div>
 </template>
 
@@ -23,6 +24,10 @@ export default {
     isVisible() {
       return this.visible;
     },
+    addRules() {
+      const rules = [(v) => !!v || "Field is required"];
+      return rules;
+    },
   },
   props: {
     tag: {
@@ -36,6 +41,9 @@ export default {
       this.visible = false;
     },
     async updateTag() {
+      if (!this.$refs.form.validate()) {
+        return;
+      }
       try {
         await TagRepository.update({
           id: this.tag.id,
@@ -55,29 +63,8 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-input::placeholder {
-  color: #383950;
-}
-
-input {
-  color: #383950;
-  padding: 0.3rem 0.7rem;
-  border-radius: 0.2rem;
-  background-color: #e2e5ed;
-  border: none;
-  width: 40%;
-  min-width: 150px;
-  display: block;
-  border-bottom: 0.3rem solid transparent;
-  margin: 1em 1em 1em 1em;
-}
-
 .v-icon {
   margin-right: 1em;
-  color: #383950;
-}
-
-label {
   color: #383950;
 }
 </style>
