@@ -1,5 +1,11 @@
 // Global styles
 
+@import url('https://fonts.googleapis.com/css2?family=Fira+Sans&display=swap');
+
+.v-application {
+  font-family: 'Fira Sans', sans-serif !important;
+}
+
 .notifications {
   margin-top: 20px;
 }
