@@ -30,7 +30,7 @@
       </v-toolbar-items>
     </v-app-bar>
 
-    <v-navigation-drawer v-model="drawer" temporary absolute>
+    <v-navigation-drawer v-model="drawer" temporary fixed>
       <v-list nav dense class="mx-2 my-4">
         <v-list-item class="d-flex align-center flex-column">
           <v-icon size="52" class="mb-2">mdi-account-circle</v-icon>

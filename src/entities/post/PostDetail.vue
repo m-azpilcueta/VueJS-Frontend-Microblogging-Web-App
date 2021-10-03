@@ -102,6 +102,7 @@ export default {
   padding: 30px 50px;
   color: #383950;
   font-size: larger;
+  overflow-wrap: break-word;
 }
 
 .error {
@@ -111,6 +112,11 @@ export default {
 .remove {
   background-color: red !important;
   color: whitesmoke !important;
+}
+
+.titles {
+  width: 80%;
+  overflow-wrap: break-word;
 }
 
 h1,

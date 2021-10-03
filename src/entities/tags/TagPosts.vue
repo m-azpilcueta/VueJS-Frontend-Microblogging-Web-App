@@ -3,7 +3,7 @@
     <LoadSpinner v-if="loading"></LoadSpinner>
     <section v-if="posts" class="d-flex justify-center">
       <div class="box">
-        <v-row class="justify-center align-center mb-4">
+        <v-row class="title justify-center align-center mb-4">
           <v-col cols="3"></v-col>
           <v-col cols="4"><h1>Posts Related</h1></v-col>
           <v-col cols="3">
@@ -46,7 +46,7 @@ export default {
     this.loading = true;
     try {
       this.posts = await PostRepository.findAllByTag(this.$route.params.id);
-      this.posts.reverse();
+      this.posts.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
     } catch (e) {
       this.$notify({
         text: e.response.data.message,
@@ -70,5 +70,9 @@ export default {
 
 #related {
   color: #383950;
+}
+
+.title {
+  overflow-wrap: break-word;
 }
 </style>

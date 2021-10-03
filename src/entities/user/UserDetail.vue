@@ -31,7 +31,7 @@ export default {
   async beforeRouteEnter(to, from, next) {
     try {
       const data = await UserRepository.findOne(to.params.id);
-      data.posts.reverse();
+      data.posts.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
       next((vm) => vm.setData(data));
     } catch (e) {
       Vue.$notify({
@@ -45,7 +45,7 @@ export default {
     try {
       this.user = null;
       const data = await UserRepository.findOne(to.params.id);
-      data.posts.reverse();
+      data.posts.sort((a, b) => new Date(b.timestamp) - new Date(a.timestamp));
       this.setData(data);
       next();
     } catch (e) {
