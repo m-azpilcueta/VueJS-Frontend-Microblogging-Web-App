@@ -1,6 +1,7 @@
 <template>
   <div class="my-container">
-    <section class="d-flex justify-center">
+    <LoadSpinner v-if="loading"></LoadSpinner>
+    <section v-if="posts" class="d-flex justify-center">
       <div class="box">
         <v-row class="justify-center align-center mb-4">
           <v-col cols="3"></v-col>
@@ -22,14 +23,16 @@
 import PostCard from "./PostCard.vue";
 import PostRepository from "@/repositories/PostRepository";
 import store from "@/common/store";
+import LoadSpinner from "@/components/LoadSpinner.vue";
 
 export default {
   data() {
     return {
       posts: [],
+      loading: false,
     };
   },
-  components: { PostCard },
+  components: { PostCard, LoadSpinner },
   computed: {
     isAdmin() {
       return store.state.user.authority == "ADMIN";
@@ -39,8 +42,19 @@ export default {
     },
   },
   async mounted() {
-    this.posts = await PostRepository.findAll();
-    this.posts.reverse();
+    this.loading = true;
+    try {
+      this.posts = await PostRepository.findAll();
+      this.posts.reverse();
+    } catch (e) {
+      this.$notify({
+        text: e.response.data.message,
+        type: "error",
+      });
+      setTimeout(() => this.$router.go(-1), 1500);
+    } finally {
+      this.loading = false;
+    }
   },
 };
 </script>

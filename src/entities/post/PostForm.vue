@@ -10,8 +10,8 @@
         <v-textarea v-model="post.body" label="Body" rows="7" :rules="bodyRules"></v-textarea>
         <div class="d-flex">
           <v-spacer />
-          <v-btn color="primary" type="submit">Submit</v-btn>
-          <v-btn @click="back()" class="ml-4">Back</v-btn>
+          <v-btn color="accent" type="submit">Submit</v-btn>
+          <v-btn color="primary" @click="back()" class="ml-4">Back</v-btn>
         </div>
       </v-form>
     </div>

@@ -1,10 +1,11 @@
 <template>
   <div class="my-container">
-    <section class="d-flex justify-center">
+    <LoadSpinner v-if="loading"></LoadSpinner>
+    <section v-if="posts" class="d-flex justify-center">
       <div class="box">
         <v-row class="justify-center align-center mb-4">
           <v-col cols="3"></v-col>
-          <v-col cols="4"><h1>Posts related</h1></v-col>
+          <v-col cols="4"><h1>Posts Related</h1></v-col>
           <v-col cols="3">
             <v-btn v-if="!isAdmin && isLogged" :to="{ name: 'PostCreate' }" color="primary">
               <v-icon>mdi-plus</v-icon>
@@ -23,11 +24,13 @@
 import PostCard from "../post/PostCard.vue";
 import PostRepository from "@/repositories/PostRepository";
 import store from "@/common/store";
+import LoadSpinner from "@/components/LoadSpinner";
 
 export default {
   data() {
     return {
       posts: {},
+      loading: false,
     };
   },
   computed: {
@@ -38,10 +41,21 @@ export default {
       return store.state.user.logged;
     },
   },
-  components: { PostCard },
+  components: { PostCard, LoadSpinner },
   async mounted() {
-    this.posts = await PostRepository.findAllByTag(this.$route.params.id);
-    this.posts.reverse();
+    this.loading = true;
+    try {
+      this.posts = await PostRepository.findAllByTag(this.$route.params.id);
+      this.posts.reverse();
+    } catch (e) {
+      this.$notify({
+        text: e.response.data.message,
+        type: "error",
+      });
+      setTimeout(() => this.$router.go(-1), 1500);
+    } finally {
+      this.loading = false;
+    }
   },
 };
 </script>
