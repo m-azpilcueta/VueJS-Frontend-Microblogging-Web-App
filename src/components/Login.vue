@@ -1,22 +1,16 @@
 <template>
-  <v-layout align-center justify-center>
-    <v-flex xs12 sm8 md4>
-      <v-form @submit.prevent="userLogin">
-        <v-card>
-          <v-card-text>
-            <v-text-field label="Login" name="login" prepend-icon="person" type="text" v-model="username"></v-text-field>
+  <div class="wrapper d-flex flex-column">
+    <v-form @submit.prevent="userLogin">
+      <v-text-field label="Login" name="login" prepend-icon="person" type="text" v-model="username"></v-text-field>
 
-            <v-text-field v-model="password" label="Password" name="password" prepend-icon="lock" type="password"></v-text-field>
-          </v-card-text>
+      <v-text-field v-model="password" label="Password" name="password" prepend-icon="lock" type="password"></v-text-field>
 
-          <v-card-actions>
-            <v-spacer></v-spacer>
-            <v-btn type="submit" color="primary">Login</v-btn>
-          </v-card-actions>
-        </v-card>
-      </v-form>
-    </v-flex>
-  </v-layout>
+      <div class="d-flex">
+        <v-spacer></v-spacer>
+        <v-btn type="submit" color="primary">Login</v-btn>
+      </div>
+    </v-form>
+  </div>
 </template>
 
 <script>
@@ -52,7 +46,13 @@ export default {
 </script>
 
 <style scoped>
-.layout {
-  margin: 3rem;
+.wrapper {
+  width: 90%;
+  max-width: 700px;
+  background-color: #f3f3f5;
+  padding: 2em 1em;
+  margin: 0 auto;
+  border-radius: 3px;
+  box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
 }
 </style>

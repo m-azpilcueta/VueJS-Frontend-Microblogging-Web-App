@@ -3,10 +3,10 @@
     <v-tab>Login</v-tab>
     <v-tab>Register</v-tab>
     <v-tab-item>
-      <Login></Login>
+      <Login class="mt-4"></Login>
     </v-tab-item>
     <v-tab-item>
-      <Register></Register>
+      <Register class="mt-4"></Register>
     </v-tab-item>
   </v-tabs>
 </template>
