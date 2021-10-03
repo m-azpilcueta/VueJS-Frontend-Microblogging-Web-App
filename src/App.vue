@@ -35,7 +35,7 @@
         <v-list-item class="d-flex align-center flex-column">
           <v-icon size="52" class="mb-2">mdi-account-circle</v-icon>
           <v-btn active-class="hide-active" to="/auth" v-if="!isLogged" exact text> Login / Register </v-btn>
-          <v-btn :to="userProfileRoute" v-if="isLogged" icon>
+          <v-btn :to="userProfileRoute" v-if="isLogged" exact text>
             {{ user.login }}
           </v-btn>
           <v-btn icon @click="logout()" v-if="isLogged">

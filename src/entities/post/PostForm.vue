@@ -2,7 +2,7 @@
   <div class="d-flex justify-center">
     <div class="box d-flex flex-column">
       <v-form ref="form" @submit.prevent="save">
-        <div class="d-flex">
+        <div class="d-flex flex-wrap">
           <v-text-field class="f-title" v-model="post.title" label="Title" :rules="titleRules"></v-text-field>
           <v-text-field class="f-author" label="Author" disabled :value="author.login"></v-text-field>
         </div>
@@ -89,9 +89,5 @@ export default {
 <style scoped>
 .f-title {
   margin-right: 0.5rem;
-}
-
-.f-author {
-  margin-left: 0.5rem;
 }
 </style>

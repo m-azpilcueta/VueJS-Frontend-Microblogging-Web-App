@@ -7,7 +7,7 @@
       <v-col class="d-flex flex-column align-center align-sm-start">
         <h2>{{ updatedUser.login }}</h2>
         <p><strong>Active: </strong>{{ updatedUser.active }}</p>
-        <div class="d-flex flex-row justify-start align-center">
+        <div v-if="updatedUser.id != currentUser" class="d-flex flex-row justify-start align-center">
           <button @click="deactivate" class="deactivate" v-if="isActive">Deactivate</button>
           <button @click="activate" class="activate" v-if="!isActive">Activate</button>
           <button @click="delete_user" class="remove">Remove</button>
@@ -19,6 +19,7 @@
 
 <script>
 import UserRepository from "@/repositories/UserRepository";
+import store from "@/common/store";
 
 export default {
   name: "UserCard",
@@ -40,6 +41,9 @@ export default {
     },
     isActive() {
       return this.updatedUser.active;
+    },
+    currentUser() {
+      return store.state.user.id;
     },
   },
   methods: {

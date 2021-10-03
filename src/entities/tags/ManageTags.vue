@@ -29,6 +29,7 @@ export default {
       tags: null,
       loading: false,
       newTag: "",
+      created: null,
     };
   },
   computed: {
@@ -43,10 +44,13 @@ export default {
       if (!this.$refs.form.validate()) {
         return;
       }
-      await TagRepository.create({
-        name: this.newTag,
-      });
-      this.tags.push({ name: this.newTag });
+      try {
+        this.created = await TagRepository.create({
+          name: this.newTag,
+        });
+      } finally {
+        this.tags.push(this.created);
+      }
     },
   },
   async mounted() {
