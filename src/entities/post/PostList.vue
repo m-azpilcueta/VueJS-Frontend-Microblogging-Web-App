@@ -28,7 +28,7 @@ import LoadSpinner from "@/components/LoadSpinner.vue";
 export default {
   data() {
     return {
-      posts: [],
+      posts: null,
       loading: false,
     };
   },

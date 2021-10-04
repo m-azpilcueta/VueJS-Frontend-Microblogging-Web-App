@@ -29,7 +29,7 @@ import LoadSpinner from "@/components/LoadSpinner";
 export default {
   data() {
     return {
-      posts: {},
+      posts: null,
       loading: false,
     };
   },
