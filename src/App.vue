@@ -87,8 +87,8 @@ export default {
     logout() {
       auth.logout();
       // Después de hacer logout nos vamos a home
-      if (this.$router.currentRoute.name != "Home") {
-        this.$router.push({ name: "Home" });
+      if (this.$router.currentRoute.name != "PostList") {
+        this.$router.push({ name: "PostList" });
       }
     },
   },

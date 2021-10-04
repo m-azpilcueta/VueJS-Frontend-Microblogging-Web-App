@@ -2,7 +2,7 @@ import Vue from "vue";
 import VueRouter from "vue-router";
 import auth from "@/common/auth";
 import store from "@/common/store";
-import { NotFound, UserAuth, Home } from "@/components";
+import { NotFound, UserAuth } from "@/components";
 import postRouter from "@/entities/post/post.router.js";
 import tagRouter from "@/entities/tags/tags.router.js";
 import userRouter from "@/entities/user/user.router.js";
@@ -20,8 +20,7 @@ const routes = [
   },
   {
     path: "/",
-    name: "Home",
-    component: Home,
+    redirect: "/posts",
     meta: { public: true },
   },
   { path: "*", component: NotFound, meta: { public: true } },
@@ -71,7 +70,7 @@ router.beforeEach((to, from, next) => {
       // página pública
       if (userIsLogged && to.meta.isLoginPage) {
         // si estamos logueados no hace falta volver a mostrar el login
-        next({ name: "Home", replace: true });
+        next({ name: "PostList", replace: true });
       } else {
         next();
       }
