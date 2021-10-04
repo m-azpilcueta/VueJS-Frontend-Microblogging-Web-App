@@ -65,14 +65,16 @@ export default {
   h1 {
     text-align: center;
     color: #383950;
+    font-size: 1.5em !important;
   }
-}
-
-#related {
-  color: #383950;
 }
 
 .title {
   overflow-wrap: break-word;
+  font-family: "Fira Sans", sans-serif !important;
+}
+
+#related {
+  color: #383950;
 }
 </style>
